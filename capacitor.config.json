@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "WeSwing",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

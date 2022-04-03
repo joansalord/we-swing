@@ -1,0 +1,8 @@
+{
+  "name": "WeSwing",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "fe6a4454"
+}
