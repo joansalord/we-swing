@@ -74,7 +74,7 @@ const Events: React.FC = () => {
           {items.map(item => (
             /* By calling the router this way we are adding the id to the path */
             //<IonItem routerLink={`/listItem/${item.id}`}>
-            <IonItem>
+            <IonItem routerLink={'listItem/1'}>
               <IonAvatar slot="start">
                 <img src="../../resources/appIcon.png" />
               </IonAvatar>

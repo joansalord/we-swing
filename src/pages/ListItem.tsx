@@ -44,7 +44,7 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>ListItem</IonTitle>
+          <IonTitle>ListItem {match.params.id}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
