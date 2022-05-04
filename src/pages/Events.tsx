@@ -1,9 +1,15 @@
-import { IonAvatar, IonBadge, IonButton, IonCheckbox, IonContent, IonHeader, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonNote, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonBadge, IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonLoading, IonNote, IonPage, IonTabBar, IonTabButton, IonTitle, IonToolbar } from '@ionic/react';
+import { calendar, ellipse, person } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './Events.css';
 import ListItem from './ListItem';
+import { logoutUser } from '../firebaseConfig'
+import { useHistory } from 'react-router';
 
 const Events: React.FC = () => {
+
+  const username = useSelector((state: any) => state.user.username)
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -60,12 +66,23 @@ const Events: React.FC = () => {
   }  */
 
   //console.log(items);
+
+  const history = useHistory()
+  const [busy, setBusy] = useState(false)
+  async function logout() {
+    setBusy(true)
+    await logoutUser()
+    setBusy(false)
+    history.replace('/')
+  }
   
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className='ion-text-center'>Events</IonTitle>
+          <IonTitle className='ion-text-center'>Events {username}</IonTitle>
+          <IonLoading isOpen={busy} />
+          <IonButton onClick={logout}/>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -73,7 +90,7 @@ const Events: React.FC = () => {
         { <IonList> 
           {items.map(item => (
             /* By calling the router this way we are adding the id to the path */
-            //<IonItem routerLink={`/listItem/${item.id}`}>
+            // <IonItem routerLink={`/listItem/${item.id}`}>
             <IonItem routerLink={'listItem/1'}>
               <IonAvatar slot="start">
                 <img src="../../resources/appIcon.png" />
@@ -116,7 +133,21 @@ const Events: React.FC = () => {
           
         </IonHeader>
       </IonContent>
-    </IonPage>
+      <IonTabBar slot="bottom">
+          <IonTabButton tab="events" href="/events">
+            <IonIcon icon={calendar} />
+            <IonLabel>Events</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab2" href="/tab2">
+            <IonIcon icon={ellipse} />
+            <IonLabel>Tab 2</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="profile" href="/profile">
+            <IonIcon icon={person} />
+            <IonLabel>Profile</IonLabel>
+        </IonTabButton>
+        </IonTabBar>
+      </IonPage>
   );
 };
 

@@ -4,6 +4,7 @@ import {
   IonIcon,
   IonLabel,
   IonRouterOutlet,
+  IonSpinner,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -34,40 +35,53 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import ListItem from './pages/ListItem';
+import Login from './pages/Login';
+import Tabs from './pages/Tabs';
+import Register from './pages/Register';
+import { useEffect, useState } from 'react';
+import { getCurrentUser } from './firebaseConfig'
+import { useDispatch } from 'react-redux';
+import { setUserState } from './redux/actions';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
+const RoutingSystem: React.FC = () => {
+  return (
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/events" component={Events} />
-          <Route exact path="/tab2" component={Tab2} />
-          <Route path="/profile" component={Profile} />
-          {/* With this path the id becomes modular. It will be passed
-          to the component for further usage. */}
-          <Route path="/listItem/:id" component={ListItem} />
-          <Route exact path="/" component={Events} />
-        </IonRouterOutlet>
-
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="events" href="/events">
-            <IonIcon icon={calendar} />
-            <IonLabel>Events</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={person} />
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
+      <Route path="/events" component={Events}/>
+      <Route path="/tab2" component={Tab2}/>
+      <Route path="/profile" component={Profile}/>
+      {/* With this path the id becomes modular. It will be passed
+      to the component for further usage. */}
+      <Route path="/listItem/:id" component={ListItem} />
     </IonReactRouter>
+  )
+}
+
+const App: React.FC = () => {
+  const [busy, setBusy] = useState(true)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+   getCurrentUser().then((user: any) => {
+     if (user) {
+       dispatch(setUserState(user.email))
+       window.history.replaceState({}, '', '/events')
+     } else {
+       window.history.replaceState({}, '', '/')
+     }
+     setBusy(false)
+   })
+  }, [])
+
+  return (
+  <IonApp>
+    {busy ? <IonSpinner /> :<RoutingSystem />}
   </IonApp>
-);
+  );
+};
 
 export default App;

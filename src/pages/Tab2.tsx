@@ -1,4 +1,5 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTitle, IonToolbar } from '@ionic/react';
+import { calendar, ellipse, person } from 'ionicons/icons';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 
@@ -18,6 +19,20 @@ const Tab2: React.FC = () => {
         </IonHeader>
         <ExploreContainer name="Tab 2 page" />
       </IonContent>
+      <IonTabBar slot="bottom">
+          <IonTabButton tab="events" href="/events">
+            <IonIcon icon={calendar} />
+            <IonLabel>Events</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab2" href="/tab2">
+            <IonIcon icon={ellipse} />
+            <IonLabel>Tab 2</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="profile" href="/profile">
+            <IonIcon icon={person} />
+            <IonLabel>Profile</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
     </IonPage>
   );
 };
