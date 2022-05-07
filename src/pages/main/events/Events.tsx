@@ -1,15 +1,16 @@
-import { IonAvatar, IonBadge, IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonLoading, IonNote, IonPage, IonTabBar, IonTabButton, IonTitle, IonToolbar } from '@ionic/react';
-import { calendar, search, person } from 'ionicons/icons';
+import { IonAvatar, IonBadge, IonButton, IonCheckbox, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonLoading, IonNote, IonPage, IonTabBar, IonTabButton, IonTitle, IonToolbar } from '@ionic/react';
+import { calendar, search, person, settings, add } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Events.css';
-import ListItem from '../ListItem';
-import { logoutUser } from '../../firebaseConfig'
+import ListItem from '../../ListItem';
+import { logoutUser } from '../../../firebaseConfig'
 import { useHistory } from 'react-router';
 
 const Events: React.FC = () => {
 
   const username = useSelector((state: any) => state.user.username)
+  const history = useHistory()
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -66,6 +67,10 @@ const Events: React.FC = () => {
   }  */
 
   //console.log(items);
+
+  function addEvent() {
+    history.replace('/addEvent')
+  }
   
   return (
     <IonPage>
@@ -113,14 +118,11 @@ const Events: React.FC = () => {
             ></IonInfiniteScrollContent>
           </IonInfiniteScroll>*/}
 
-
-
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Events</IonTitle>
-          </IonToolbar>
-          
-        </IonHeader>
+        <IonFab vertical='bottom' horizontal='end' slot='fixed'>
+          <IonFabButton onClick={addEvent}>
+            <IonIcon icon={add} />
+          </IonFabButton>
+        </IonFab>
       </IonContent>
       <IonTabBar slot="bottom">
           <IonTabButton tab="events" href="/events">

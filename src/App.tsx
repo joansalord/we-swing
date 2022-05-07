@@ -12,9 +12,9 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { calendar, ellipse, person, square, triangle } from 'ionicons/icons';
-import Events from './pages/main/Events';
+import Events from './pages/main/events/Events';
 import Tab2 from './pages/main/Tab2';
-import Profile from './pages/main/Profile';
+import Profile from './pages/main/profile/Profile';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,7 +42,8 @@ import { useEffect, useState } from 'react';
 import { getCurrentUser } from './firebaseConfig'
 import { useDispatch } from 'react-redux';
 import { setUserState } from './redux/actions';
-import EditProfile from './pages/main/EditProfile';
+import EditProfile from './pages/main/profile/EditProfile';
+import AddEvent from './pages/main/events/AddEvent';
 
 setupIonicReact();
 
@@ -53,6 +54,7 @@ const RoutingSystem: React.FC = () => {
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
       <Route path="/events" component={Events}/>
+      <Route path="/addEvent" component={AddEvent} />
       <Route path="/tab2" component={Tab2}/>
       <Route path="/profile" component={Profile}/>
       <Route path="/editProfile" component={EditProfile}/>

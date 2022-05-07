@@ -3,11 +3,10 @@ import { backspace, calendar, ellipse, person, save, search, star } from 'ionico
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { logoutUser } from '../../firebaseConfig';
-import './Profile.css';
+import { logoutUser } from '../../../firebaseConfig';
 import { format, parseISO } from 'date-fns'
 
-const EditProfile: React.FC = () => {
+const AddEvent: React.FC = () => {
   const username = useSelector((state: any) => state.user.username)
 
   const history = useHistory()
@@ -30,7 +29,8 @@ const EditProfile: React.FC = () => {
       and make SQL query*/
       //await( RESPONSE FROM SERVER )
       setBusy(false)
-      history.replace('/profile')
+      //redirect to selected event
+      history.replace('/events')
   }
 
   const sleep = (milliseconds: number) => {
@@ -40,7 +40,7 @@ const EditProfile: React.FC = () => {
   async function cancelEdit() {
       setDismissLoading(true)
       await sleep(1000)
-      history.replace('/profile')
+      history.replace('/events')
       setDismissLoading(false)
   }
 
@@ -58,7 +58,7 @@ const EditProfile: React.FC = () => {
                 <IonIcon slot="icon-only" icon={backspace} />
             </IonButton>
         </IonButtons>
-          <IonTitle>Edit Profile</IonTitle>
+          <IonTitle>Add Event</IonTitle>
           <IonButtons slot="primary">
           <IonLoading isOpen={busy} />
             <IonButton onClick={submitChanges}>
@@ -179,4 +179,4 @@ const EditProfile: React.FC = () => {
   );
 };
 
-export default EditProfile;
+export default AddEvent;

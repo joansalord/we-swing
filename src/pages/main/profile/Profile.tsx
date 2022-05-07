@@ -3,7 +3,7 @@ import { calendar, ellipse, person, search, star } from 'ionicons/icons';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { logoutUser } from '../../firebaseConfig';
+import { logoutUser } from '../../../firebaseConfig';
 import './Profile.css';
 
 const Profile: React.FC = () => {

@@ -2,8 +2,8 @@ import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } 
 import { IonReactRouter } from "@ionic/react-router";
 import { calendar, ellipse, person } from "ionicons/icons";
 import { Redirect, Route } from "react-router";
-import Events from "./main/Events";
-import Profile from "./main/Profile";
+import Events from "./main/events/Events";
+import Profile from "./main/profile/Profile";
 import Tab2 from "./main/Tab2";
 
 const Tabs: React.FC = () => {
