@@ -1,10 +1,11 @@
-import { IonAvatar, IonButton, IonButtons, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonLabel, IonLoading, IonPage, IonRow, IonTabBar, IonTabButton, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCol, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonLoading, IonPage, IonPopover, IonRow, IonTabBar, IonTabButton, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import { backspace, calendar, ellipse, person, save, search, star } from 'ionicons/icons';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { logoutUser } from '../../firebaseConfig';
 import './Profile.css';
+import { format, parseISO } from 'date-fns'
 
 const EditProfile: React.FC = () => {
   const username = useSelector((state: any) => state.user.username)
@@ -19,11 +20,12 @@ const EditProfile: React.FC = () => {
   const [country, setCountry] = useState<string>()
   const [language, setLanguage] = useState<string>()
   const [description, setDescription] = useState<string>()
+  const [date, setDate] = useState<string>()
 
 
   async function submitChanges() {
       setBusy(true)
-      console.log(fullName, email, gender, country, language, description)
+      console.log(fullName, email, gender, country, language, description, date)
       /*Call to server endpoint with all the inputs 
       and make SQL query*/
       //await( RESPONSE FROM SERVER )
@@ -41,6 +43,10 @@ const EditProfile: React.FC = () => {
       history.replace('/profile')
       setDismissLoading(false)
   }
+
+  const formatDate = (value: string) => {
+    return format(parseISO(value), 'MMM dd yyyy');
+  };
 
   return (
     <IonPage>
@@ -126,6 +132,10 @@ const EditProfile: React.FC = () => {
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Birth date</IonLabel>
               <p>21/08/2000</p>
+              <IonInput value={date} id="date" placeholder='date'/>
+              <IonPopover trigger='date' size='auto'>
+                  <IonDatetime presentation='date' locale="en-EN" onIonChange={e => setDate(formatDate(e.detail.value!))}/>
+              </IonPopover>
             </IonCol>
           </IonRow>
           <IonRow>
