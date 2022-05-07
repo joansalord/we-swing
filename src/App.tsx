@@ -42,6 +42,7 @@ import { useEffect, useState } from 'react';
 import { getCurrentUser } from './firebaseConfig'
 import { useDispatch } from 'react-redux';
 import { setUserState } from './redux/actions';
+import EditProfile from './pages/main/EditProfile';
 
 setupIonicReact();
 
@@ -54,6 +55,7 @@ const RoutingSystem: React.FC = () => {
       <Route path="/events" component={Events}/>
       <Route path="/tab2" component={Tab2}/>
       <Route path="/profile" component={Profile}/>
+      <Route path="/editProfile" component={EditProfile}/>
       {/* With this path the id becomes modular. It will be passed
       to the component for further usage. */}
       <Route path="/listItem/:id" component={ListItem} />

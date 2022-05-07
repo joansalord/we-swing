@@ -2,27 +2,44 @@ import { IonApp, IonButton, IonContent, IonHeader, IonIcon, IonInput, IonLabel, 
 import { IonReactRouter } from "@ionic/react-router";
 import { calendar, ellipse, person } from "ionicons/icons";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { registerUser } from "../firebaseConfig";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { loginUser, registerUser } from "../firebaseConfig";
+import { setUserState } from "../redux/actions";
 
 const Register: React.FC = () => {
 
     const [busy, setBusy] = useState<boolean>(false)
+    const history = useHistory()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [cpassword, setCPassword] = useState('')
+    const dispatch = useDispatch()
 
     const [present, dismiss] = useIonToast();
 
-    function loginUser() {
-        console.log(username, password)
+    async function login() {
+      setBusy(true)
+        const res: any = await loginUser(username, password)
+
+        if (!res) {
+          present('Error logging with your credentials', 2000)
+        } else {
+          dispatch(setUserState(res.user.email))
+          history.replace('/events')
+          present('You logged in!', 2000)
+          
+        }
+        console.log(`${res ? 'Login success' : 'Login failed'}`)
+        setBusy(false)
     }
 
     async function register() {
       setBusy(true)
       //validation
       if (password !== cpassword) {
+        setBusy(false)
         return present('Passwords do not match')
       }
 
@@ -33,7 +50,10 @@ const Register: React.FC = () => {
       const res = await registerUser(username, password)
 
       if (res) {
-        present('You have registered successfully!')
+        present('You have registered successfully!', 2000)
+        login()
+      } else {
+        present('Error', 2000)
       }
       setBusy(false)
     }
