@@ -12,9 +12,9 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { calendar, ellipse, person, square, triangle } from 'ionicons/icons';
-import Events from './pages/Events';
-import Tab2 from './pages/Tab2';
-import Profile from './pages/Profile';
+import Events from './pages/main/Events';
+import Tab2 from './pages/main/Tab2';
+import Profile from './pages/main/Profile';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

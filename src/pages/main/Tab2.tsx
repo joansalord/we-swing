@@ -1,21 +1,23 @@
 import { IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTitle, IonToolbar } from '@ionic/react';
-import { calendar, ellipse, person } from 'ionicons/icons';
-import './Profile.css';
+import { calendar, search, person } from 'ionicons/icons';
+import ExploreContainer from '../../components/ExploreContainer';
+import './Tab2.css';
 
-const Profile: React.FC = () => {
+const Tab2: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+          <IonTitle>Tab 2</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">TabProfile</IonTitle>
+            <IonTitle size="large">Tab 2</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <ExploreContainer name="Tab 2 page" />
       </IonContent>
       <IonTabBar slot="bottom">
           <IonTabButton tab="events" href="/events">
@@ -23,8 +25,8 @@ const Profile: React.FC = () => {
             <IonLabel>Events</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon icon={search} />
+            <IonLabel>Search</IonLabel>
           </IonTabButton>
           <IonTabButton tab="profile" href="/profile">
             <IonIcon icon={person} />
@@ -35,4 +37,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default Tab2;

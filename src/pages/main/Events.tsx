@@ -1,10 +1,10 @@
 import { IonAvatar, IonBadge, IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonItem, IonLabel, IonList, IonLoading, IonNote, IonPage, IonTabBar, IonTabButton, IonTitle, IonToolbar } from '@ionic/react';
-import { calendar, ellipse, person } from 'ionicons/icons';
+import { calendar, search, person } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Events.css';
-import ListItem from './ListItem';
-import { logoutUser } from '../firebaseConfig'
+import ListItem from '../ListItem';
+import { logoutUser } from '../../firebaseConfig'
 import { useHistory } from 'react-router';
 
 const Events: React.FC = () => {
@@ -139,8 +139,8 @@ const Events: React.FC = () => {
             <IonLabel>Events</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon icon={search} />
+            <IonLabel>Search</IonLabel>
           </IonTabButton>
           <IonTabButton tab="profile" href="/profile">
             <IonIcon icon={person} />
