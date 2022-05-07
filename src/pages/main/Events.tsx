@@ -66,23 +66,12 @@ const Events: React.FC = () => {
   }  */
 
   //console.log(items);
-
-  const history = useHistory()
-  const [busy, setBusy] = useState(false)
-  async function logout() {
-    setBusy(true)
-    await logoutUser()
-    setBusy(false)
-    history.replace('/')
-  }
   
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className='ion-text-center'>Events {username}</IonTitle>
-          <IonLoading isOpen={busy} />
-          <IonButton onClick={logout}/>
+          <IonTitle>Events {username}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

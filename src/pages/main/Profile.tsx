@@ -1,17 +1,36 @@
-import { IonAvatar, IonButton, IonCol, IonContent, IonHeader, IonIcon, IonLabel, IonPage, IonRow, IonTabBar, IonTabButton, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
-import { calendar, ellipse, person, search } from 'ionicons/icons';
+import { IonAvatar, IonButton, IonButtons, IonCol, IonContent, IonHeader, IonIcon, IonLabel, IonLoading, IonPage, IonRow, IonTabBar, IonTabButton, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
+import { calendar, ellipse, person, search, star } from 'ionicons/icons';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { logoutUser } from '../../firebaseConfig';
 import './Profile.css';
 
 const Profile: React.FC = () => {
   const username = useSelector((state: any) => state.user.username)
 
+  const history = useHistory()
+  const [busy, setBusy] = useState(false)
+  async function logout() {
+    setBusy(true)
+    await logoutUser()
+    setBusy(false)
+    history.replace('/')
+  }
+
   return (
     <IonPage>
-      <IonHeader className='ion-text-center'>
+      <IonHeader>
         <IonToolbar>
           <IonTitle>Profile</IonTitle>
+          <IonButtons slot="primary">
+          <IonLoading isOpen={busy} />
+          <IonButton onClick={logout}>
+            <IonIcon slot="icon-only" icon={star} />
+          </IonButton>
+    </IonButtons>
         </IonToolbar>
+        
       </IonHeader>
       <IonContent fullscreen>
 
