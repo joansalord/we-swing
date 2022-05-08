@@ -1,4 +1,4 @@
-import { IonAvatar, IonButton, IonButtons, IonCol, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonLoading, IonPage, IonPopover, IonRow, IonTabBar, IonTabButton, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCol, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonLoading, IonPage, IonPopover, IonRow, IonTabBar, IonTabButton, IonText, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import { backspace, calendar, ellipse, person, save, search, star } from 'ionicons/icons';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -13,24 +13,56 @@ const AddEvent: React.FC = () => {
   const [busy, setBusy] = useState(false)
   const [dismissLoading, setDismissLoading] = useState(false)
 
-  const [fullName, setFullName] = useState<string>()
-  const [email, setEmail] = useState<string>()
-  const [gender, setGender] = useState<string>()
+  const [title, setTitle] = useState<string>()
+  const [website, setWebsite] = useState<string>()
   const [country, setCountry] = useState<string>()
-  const [language, setLanguage] = useState<string>()
-  const [description, setDescription] = useState<string>()
+  const [town, setTown] = useState<string>()
   const [date, setDate] = useState<string>()
+  const [styles, setStyles] = useState<string>()
+  const [description, setDescription] = useState<string>()
 
 
   async function submitChanges() {
       setBusy(true)
-      console.log(fullName, email, gender, country, language, description, date)
+      console.log(title, website, country, town, date, styles, description, username)
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+      },
+        body: JSON.stringify({
+          title: title,
+          website: website,
+          country: country,
+          town: town,
+          date: date,
+          styles: styles,
+          description: description,
+          organizer: username
+      })
+      }
+
+      fetch(`http://localhost:8080/process/addEvent`, requestOptions)
+      //fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}/${username}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          console.log(error);
+        }
+      )
       /*Call to server endpoint with all the inputs 
       and make SQL query*/
       //await( RESPONSE FROM SERVER )
       setBusy(false)
       //redirect to selected event
-      history.replace('/events')
+      //history.replace('/events')
   }
 
   const sleep = (milliseconds: number) => {
@@ -97,42 +129,18 @@ const AddEvent: React.FC = () => {
             </IonCol>
           </IonRow>
   </div>*/}
-        <div className='mainDiv'>
-          <IonRow>
-            <IonCol size='4'>
-              <IonAvatar>
-                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-              </IonAvatar>
-            </IonCol>
-            <IonCol size='4' className='ion-text-center'>
-              <p>0</p>
-              <p>Seguidores</p>
-            </IonCol>
-            <IonCol size='4' className='ion-text-center'>
-              <p>0</p>
-              <p>Seguidos</p>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-            <h2 className='profileTitle'>{username}</h2>
-            </IonCol>
-          </IonRow>
-          <IonRow className='ion-text-center'>
-            
-          </IonRow>
-        </div>
         <div className='mainDiv profileProperties'>
           <IonRow>
             <IonCol size='8'>
-              <IonLabel class='profileLabel'>Full name</IonLabel>
-              <p>Joan Salord Ribó</p>
-              <IonInput value={fullName} placeholder="Enter Input" onIonChange={e => setFullName(e.detail.value!)}></IonInput>
+              <IonLabel class='profileLabel'>Event title</IonLabel>
+              <IonInput value={title} placeholder="Enter event title" onIonChange={e => setTitle(e.detail.value!)}></IonInput>
             </IonCol>
-            <IonCol size='4'>
-              <IonLabel class='profileLabel'>Birth date</IonLabel>
-              <p>21/08/2000</p>
-              <IonInput value={date} id="date" placeholder='date'/>
+            
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonLabel class='profileLabel'>Date</IonLabel>
+              <IonInput value={date} id="date" placeholder='Enter date'/>
               <IonPopover trigger='date' size='auto'>
                   <IonDatetime presentation='date' locale="en-EN" onIonChange={e => setDate(formatDate(e.detail.value!))}/>
               </IonPopover>
@@ -140,35 +148,31 @@ const AddEvent: React.FC = () => {
           </IonRow>
           <IonRow>
           <IonCol>
-              <IonLabel class='profileLabel'>Email</IonLabel>
-              <p>a21joasalrib@inspedralbes.cat</p>
-              <IonInput value={email} placeholder="Enter Input" onIonChange={e => setEmail(e.detail.value!)}></IonInput>
+              <IonLabel class='profileLabel'>Website</IonLabel>
+              <IonInput value={website} placeholder="Enter website" onIonChange={e => setWebsite(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
           <IonRow> 
             <IonCol size='4'>
-              <IonLabel class='profileLabel'>Sex</IonLabel>
-              <p>Please</p>
-              <IonInput value={gender} placeholder="Enter Input" onIonChange={e => setGender(e.detail.value!)}></IonInput>
-            </IonCol>
-            <IonCol size='4'>
               <IonLabel class='profileLabel'>Country</IonLabel>
-              <p>Spain</p>
-              <IonInput value={country} placeholder="Enter Input" onIonChange={e => setCountry(e.detail.value!)}></IonInput>
+              <IonInput value={country} placeholder="Enter country" onIonChange={e => setCountry(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
-              <IonLabel class='profileLabel'>Language</IonLabel>
-              <p>Spanish</p>
-              <IonInput value={language} placeholder="Enter Input" onIonChange={e => setLanguage(e.detail.value!)}></IonInput>
+              <IonLabel class='profileLabel'>Town</IonLabel>
+              <IonInput value={town} placeholder="Enter Input" onIonChange={e => setTown(e.detail.value!)}></IonInput>
+            </IonCol>
+            
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonLabel class='profileLabel'>Styles</IonLabel>
+              <IonInput value={styles} placeholder="Enter styles" onIonChange={e => setStyles(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonLabel class='profileLabel'>Description</IonLabel>
-              <IonTextarea >
-                <p className='descriptionText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie sem nec nibh congue gravida. Curabitur quis tincidunt lacus. Proin convallis at dolor non malesuada. Maecenas bibendum nulla sit amet diam sagittis sollicitudin. Integer pulvinar lobortis neque, ut venenatis risus tempus id. Aliquam tristique commodo rutrum. Vestibulum volutpat vehicula arcu, vel gravida sapien sodales eget. Aenean ac cursus purus. Ut vitae quam eu mi iaculis bibendum eu ac arcu.</p>
-                <IonInput value={description} placeholder="Enter Input" onIonChange={e => setDescription(e.detail.value!)}></IonInput>
-              </IonTextarea>
+              <IonTextarea value={description} placeholder="Enter description" onIonChange={e => setDescription(e.detail.value!)} />
             </IonCol>
           </IonRow>
         </div>

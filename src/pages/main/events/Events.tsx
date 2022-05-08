@@ -19,6 +19,7 @@ const Events: React.FC = () => {
     title: string;
     website: string;
     country: string;
+    town: string;
     date: string;
     styles: string;
     description: string;
@@ -96,6 +97,7 @@ const Events: React.FC = () => {
               <IonLabel>
                 <h1 className= "title" >{item.title}</h1>
                 <h3>Country: {item.country}</h3>
+                <h3>Town: {item.town}</h3>
                 <IonNote>Date: {item.date}</IonNote>
                 <p>Website: {item.website}</p>
                 <p>Styles: {item.styles}</p>
