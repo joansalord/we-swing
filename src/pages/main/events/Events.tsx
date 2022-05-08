@@ -3,7 +3,7 @@ import { calendar, search, person, settings, add } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Events.css';
-import ListItem from '../../ListItem';
+import ListItem from './ListItem';
 import { logoutUser } from '../../../firebaseConfig'
 import { useHistory } from 'react-router';
 

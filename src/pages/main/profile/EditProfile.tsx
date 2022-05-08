@@ -25,10 +25,23 @@ const EditProfile: React.FC = () => {
 
   async function submitChanges() {
       setBusy(true)
-      console.log(fullName, email, gender, country, language, description, date)
+      //console.log(fullName,date, email, gender, country, language, description)
       /*Call to server endpoint with all the inputs 
       and make SQL query*/
       //await( RESPONSE FROM SERVER )
+      fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          console.log(error);
+        }
+      )
       setBusy(false)
       history.replace('/profile')
   }
