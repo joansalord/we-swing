@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonLoading, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCol, IonContent, IonHeader, IonIcon, IonLabel, IonLoading, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { backspace, save } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory } from 'react-router';
@@ -19,10 +19,14 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [dismissLoading, setDismissLoading] = useState(false)
   const [items, setItems] = useState<{
+    id: string;
     title: string;
-    link: string;
+    website: string;
     country: string;
-    date: string
+    town: string;
+    date: string;
+    styles: string;
+    description: string;
   }[]>([]);
   
   useEffect(() => {
@@ -49,43 +53,87 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds)).catch(e => console.error(e))
 }
 
-  async function cancelAdd() {
+  async function backToEvents() {
     setDismissLoading(true)
     await sleep(1000)
     history.replace('/events')
     setDismissLoading(false)
 }
 
-  function addEvent() {
-
+  function attend() {
+    console.log('I will attend.')
   }
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-        <IonButtons slot="start">
-            <IonLoading isOpen={dismissLoading} duration={2000} message={"Dismissing changes"}/>
-            <IonButton onClick={cancelAdd}>
-                <IonIcon slot="icon-only" icon={backspace} />
-            </IonButton>
-        </IonButtons>
-          <IonTitle>ListItem {match.params.id}</IonTitle>
-          <IonButtons slot="primary">
-          <IonLoading isOpen={busy} />
-            <IonButton onClick={addEvent}>
-              <IonIcon slot="icon-only" icon={save} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
+      {items.map(item => (
+        <>
+          <IonHeader>
           <IonToolbar>
-            <IonTitle size="large">TabProfile</IonTitle>
+          <IonButtons slot="start">
+              <IonButton onClick={backToEvents}>
+                  <IonIcon slot="icon-only" icon={backspace} />
+              </IonButton>
+          </IonButtons>
+            <IonTitle>ListItem {match.params.id}</IonTitle>
           </IonToolbar>
         </IonHeader>
-      </IonContent>
+        <IonContent fullscreen>
+        <div className='mainDiv'>
+            <IonRow>
+              <IonCol className='ion-text-center'>
+                <h2 className='profileTitle'>{item.title}</h2>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+            <IonCol size='4' className='ion-text-center'>
+                <p>0</p>
+                <p>Attendees</p>
+              </IonCol>
+              <IonCol>
+                <IonButton expand="block" fill="outline" onClick={attend}>I will attend</IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonLabel class='profileLabel'>Website</IonLabel>
+                <p>{item.website}</p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size='6'>
+                <IonLabel class='profileLabel'>Country</IonLabel>
+                <p>{item.country}</p>
+              </IonCol>
+              <IonCol size='6'>
+                <IonLabel class='profileLabel'>Town</IonLabel>
+                <p>{item.town}</p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonLabel class='profileLabel'>Date</IonLabel>
+                <p>{item.date}</p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonLabel class='profileLabel'>Styles</IonLabel>
+                <p>{item.styles}</p>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <IonLabel class='profileLabel'>Description</IonLabel>
+                <p>{item.description}</p>
+              </IonCol>
+
+            </IonRow>
+          </div>
+        </IonContent>
+      </>
+      ))}
+      
     </IonPage>
   );
 };

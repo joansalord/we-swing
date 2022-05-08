@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { logoutUser } from '../../../firebaseConfig';
 import './Profile.css';
 import { format, parseISO } from 'date-fns'
+import { request } from 'http';
 
 const EditProfile: React.FC = () => {
   const username = useSelector((state: any) => state.user.username)
@@ -29,7 +30,25 @@ const EditProfile: React.FC = () => {
       /*Call to server endpoint with all the inputs 
       and make SQL query*/
       //await( RESPONSE FROM SERVER )
-      fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}`)
+      const requestOptions = {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+      },
+        body: JSON.stringify({
+          username: username,
+          fullName: fullName,
+          date: date,
+          email: email,
+          gender: gender,
+          country: country,
+          language: language,
+          description: description
+      })
+      }
+
+      fetch(`http://localhost:8080/process/saveProfile`, requestOptions)
+      //fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}/${username}`)
       .then(res => res.json())
       .then(
         (result) => {

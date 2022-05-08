@@ -17,9 +17,11 @@ const Events: React.FC = () => {
   const [items, setItems] = useState<{
     id: string;
     title: string;
-    link: string;
+    website: string;
     country: string;
-    date: string
+    date: string;
+    styles: string;
+    description: string;
   }[]>([]);
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
 
@@ -27,11 +29,12 @@ const Events: React.FC = () => {
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
+    setIsLoaded(true)
     fetch("http://localhost:8080/process/show")
       .then(res => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
+          setIsLoaded(false);
           setItems(result);
           console.log(result);
         },
@@ -39,7 +42,7 @@ const Events: React.FC = () => {
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          setIsLoaded(true);
+          setIsLoaded(false);
           setError(error);
           console.log(error);
         }
@@ -79,9 +82,10 @@ const Events: React.FC = () => {
           <IonTitle>Events {username}</IonTitle>
         </IonToolbar>
       </IonHeader>
+      {isLoaded && <IonLoading message="Loading events..." duration={0} isOpen={isLoaded} animated={true}/>}
       <IonContent fullscreen>
         <IonButton>Default</IonButton>
-        { <IonList> 
+         <IonList> 
           {items.map(item => (
             /* By calling the router this way we are adding the id to the path */
             // <IonItem routerLink={`/listItem/${item.id}`}>
@@ -93,11 +97,14 @@ const Events: React.FC = () => {
                 <h1 className= "title" >{item.title}</h1>
                 <h3>Country: {item.country}</h3>
                 <IonNote>Date: {item.date}</IonNote>
+                <p>Website: {item.website}</p>
+                <p>Styles: {item.styles}</p>
+                <p>Description: {item.description}</p>
               </IonLabel>
             </IonItem>
           ))}
           </IonList> 
-          }
+          
           {/*<IonList>
             {items.map(item => {
               return (
