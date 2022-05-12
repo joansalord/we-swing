@@ -93,7 +93,7 @@ const Register: React.FC = () => {
         }
       )
 
-        //login()
+        login()
       } else {
         present('Error', 2000)
       }
