@@ -1,0 +1,25 @@
+.mainDiv {
+    margin: 15px;
+}
+
+.profileTitle {
+    color: #9D4141;
+    margin-top: -10px;
+}
+
+.profileProperties {
+    font-size: medium;
+}
+
+.profileLabel {
+    color: #9D4141;
+    font-weight: bold;
+}
+
+.descriptionTextArea {
+    background-color: aliceblue;
+}
+
+.descriptionText {
+    text-align: justify;
+}
