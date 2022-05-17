@@ -21,7 +21,7 @@ const Tab2: React.FC = () => {
 
   function searchUsers() {
     //Fetch by name.
-    fetch("http://localhost:8080/process/getUsers")
+    fetch(`http://localhost:40500/process/getProfileList/${name}`)
       .then(res => res.json())
       .then(
         (result) => {

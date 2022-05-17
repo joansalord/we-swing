@@ -78,7 +78,7 @@ const Register: React.FC = () => {
             language: language
         })
         }
-        fetch(`http://localhost:8080/process/insertUser`, requestOptions)
+        fetch(`http://localhost:40500/process/insertUser`, requestOptions)
         //fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}/${username}`)
         .then(res => res.json())
         .then(

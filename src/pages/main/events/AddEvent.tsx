@@ -43,7 +43,7 @@ const AddEvent: React.FC = () => {
       })
       }
 
-      fetch(`http://localhost:8080/process/addEvent`, requestOptions)
+      fetch(`http://localhost:40500/process/addEvent`, requestOptions)
       //fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}/${username}`)
       .then(res => res.json())
       .then(

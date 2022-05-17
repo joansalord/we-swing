@@ -31,7 +31,7 @@ const Events: React.FC = () => {
   // similar to componentDidMount()
   useEffect(() => {
     setIsLoaded(true)
-    fetch("http://localhost:8080/process/show")
+    fetch("http://localhost:40500/process/events")
       .then(res => res.json())
       .then(
         (result) => {
@@ -89,8 +89,8 @@ const Events: React.FC = () => {
          <IonList> 
           {items.map(item => (
             /* By calling the router this way we are adding the id to the path */
-            // <IonItem routerLink={`/listItem/${item.id}`}>
-            <IonItem routerLink={'listItem/1'}>
+             <IonItem routerLink={`/listItem/${item.id}`}>
+            {/*<IonItem routerLink={'listItem/1'}>*/}
               <IonAvatar slot="start">
                 <img src="../../resources/appIcon.png" />
               </IonAvatar>

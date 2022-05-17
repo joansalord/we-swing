@@ -30,7 +30,7 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
   }[]>([]);
   
   useEffect(() => {
-    fetch(`http://localhost:8080/process/item/${match.params.id}`)
+    fetch(`http://localhost:40500/process/item/${match.params.id}`)
       .then(res => res.json())
       .then(
         (result) => {

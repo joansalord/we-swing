@@ -47,7 +47,7 @@ const EditProfile: React.FC = () => {
       })
       }
 
-      fetch(`http://localhost:8080/process/saveProfile`, requestOptions)
+      fetch(`http://localhost:40500/process/saveProfile`, requestOptions)
       //fetch(`http://localhost:8080/process/saveProfile/${fullName}/${date}/${email}/${gender}/${country}/${language}/${description}/${username}`)
       .then(res => res.json())
       .then(

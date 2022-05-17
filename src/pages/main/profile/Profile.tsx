@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8080/process/profile")
+    fetch(`http://localhost:40500/process/profile/${username}`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -129,36 +129,36 @@ const Profile: React.FC = () => {
             <IonCol size='8'>
               <IonLabel class='profileLabel'>Full name</IonLabel>
               <p>{items?.fullName}</p>
-              <p>Joan Salord Ribó</p>
+              {/*<p>Joan Salord Ribó</p>*/}
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Birth date</IonLabel>
               <p>{items?.date}</p>
-              <p>21/08/2000</p>
+              {/*<p>21/08/2000</p>*/}
             </IonCol>
           </IonRow>
           <IonRow>
           <IonCol>
               <IonLabel class='profileLabel'>Email</IonLabel>
               <p>{items?.email}</p>
-              <p>a21joasalrib@inspedralbes.cat</p>
+              {/*<p>a21joasalrib@inspedralbes.cat</p>*/}
             </IonCol>
           </IonRow>
           <IonRow> 
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Gender</IonLabel>
               <p>{items?.gender}</p>
-              <p>Please</p>
+              {/*<p>Please</p>*/}
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Country</IonLabel>
               <p>{items?.country}</p>
-              <p>Spain</p>
+              {/*<p>Spain</p>*/}
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Language</IonLabel>
               <p>{items?.language}</p>
-              <p>Spanish</p>
+              {/*<p>Spanish</p>*/}
             </IonCol>
           </IonRow>
           <IonRow>
@@ -166,8 +166,8 @@ const Profile: React.FC = () => {
               <IonLabel class='profileLabel'>Description</IonLabel>
               <IonTextarea >
               <p>{items?.description}</p>
-                <p className='descriptionText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie sem nec nibh congue gravida. Curabitur quis tincidunt lacus. Proin convallis at dolor non malesuada. Maecenas bibendum nulla sit amet diam sagittis sollicitudin. Integer pulvinar lobortis neque, ut venenatis risus tempus id. Aliquam tristique commodo rutrum. Vestibulum volutpat vehicula arcu, vel gravida sapien sodales eget. Aenean ac cursus purus. Ut vitae quam eu mi iaculis bibendum eu ac arcu.</p>
-              </IonTextarea>
+{/*                <p className='descriptionText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie sem nec nibh congue gravida. Curabitur quis tincidunt lacus. Proin convallis at dolor non malesuada. Maecenas bibendum nulla sit amet diam sagittis sollicitudin. Integer pulvinar lobortis neque, ut venenatis risus tempus id. Aliquam tristique commodo rutrum. Vestibulum volutpat vehicula arcu, vel gravida sapien sodales eget. Aenean ac cursus purus. Ut vitae quam eu mi iaculis bibendum eu ac arcu.</p>
+*/}              </IonTextarea>
             </IonCol>
           </IonRow>
         </div>
