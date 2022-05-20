@@ -1,6 +1,6 @@
 import { IonAvatar, IonButton, IonButtons, IonCol, IonContent, IonDatetime, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonLoading, IonPage, IonPopover, IonRow, IonTabBar, IonTabButton, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import { backspace, calendar, ellipse, person, save, search, star } from 'ionicons/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { logoutUser } from '../../../firebaseConfig';
@@ -23,6 +23,33 @@ const EditProfile: React.FC = () => {
   const [description, setDescription] = useState<string>()
   const [date, setDate] = useState<string>()
 
+  const [items, setItems] = useState<{
+    fullName: string;
+    email: string;
+    gender: string;
+    country: string;
+    language: string;
+    description: string;
+    date: string;
+  }>();
+
+  useEffect(() => {
+    fetch(`http://localhost:40500/process/profile/${username}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setItems(result);
+          console.log(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setError(error);
+          console.log(error);
+        }
+      )
+  }, [])
 
   async function submitChanges() {
       setBusy(true)
@@ -212,3 +239,7 @@ const EditProfile: React.FC = () => {
 };
 
 export default EditProfile;
+function setError(error: any) {
+  throw new Error('Function not implemented.');
+}
+

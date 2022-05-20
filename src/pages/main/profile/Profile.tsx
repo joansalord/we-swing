@@ -164,10 +164,9 @@ const Profile: React.FC = () => {
           <IonRow>
             <IonCol>
               <IonLabel class='profileLabel'>Description</IonLabel>
-              <IonTextarea >
-              <p>{items?.description}</p>
-{/*                <p className='descriptionText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie sem nec nibh congue gravida. Curabitur quis tincidunt lacus. Proin convallis at dolor non malesuada. Maecenas bibendum nulla sit amet diam sagittis sollicitudin. Integer pulvinar lobortis neque, ut venenatis risus tempus id. Aliquam tristique commodo rutrum. Vestibulum volutpat vehicula arcu, vel gravida sapien sodales eget. Aenean ac cursus purus. Ut vitae quam eu mi iaculis bibendum eu ac arcu.</p>
-*/}              </IonTextarea>
+              <IonTextarea>
+                <p>{items?.description}</p>
+              </IonTextarea>
             </IonCol>
           </IonRow>
         </div>
