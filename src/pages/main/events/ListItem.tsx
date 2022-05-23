@@ -1,5 +1,6 @@
 import { IonButton, IonButtons, IonCol, IonContent, IonHeader, IonIcon, IonLabel, IonLoading, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { backspace, save } from 'ionicons/icons';
+import { stringify } from 'querystring';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RouteComponentProps, useHistory } from 'react-router';
@@ -30,8 +31,33 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
     styles: string;
     description: string;
   }[]>([]);
+
+  const [totalAtendees, setTotalAtendees] = useState<{
+    number: string;
+  }[]>([]);
+
+  function rechargeAtendees() {
+    fetch(`http://localhost:40500/process/totalAtendees/${match.params.id}`)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setIsLoaded(true);
+        setTotalAtendees(result);
+        console.log(totalAtendees);
+      },
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        setIsLoaded(true);
+        setError(error);
+        console.log(error);
+      }
+    )
+  }
   
   useEffect(() => {
+    rechargeAtendees();
     fetch(`http://localhost:40500/process/item/${match.params.id}`)
       .then(res => res.json())
       .then(
@@ -74,6 +100,7 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
         username: username,
         id: match.params.id
     })
+    
     }
 
     /*Missing check if user already attends the event,
@@ -86,7 +113,7 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
     fetch(`http://localhost:40500/process/attend`, requestOptions)
     .then(res => res.json())
     .then(
-      (result) => {
+      async (result) => {
         console.log(result);
       },
       // Note: it's important to handle errors here
@@ -96,6 +123,9 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
         console.log(error);
       }
     )
+
+    
+    
   }
 
   return (
@@ -121,7 +151,7 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
             </IonRow>
             <IonRow>
             <IonCol size='4' className='ion-text-center'>
-                <p>0</p>
+                <p>{totalAtendees}</p>
                 <p>Attendees</p>
               </IonCol>
               <IonCol>
