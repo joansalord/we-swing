@@ -57,12 +57,8 @@ const AddEvent: React.FC = () => {
           console.log(error);
         }
       )
-      /*Call to server endpoint with all the inputs 
-      and make SQL query*/
-      //await( RESPONSE FROM SERVER )
       setBusy(false)
-      //redirect to selected event
-      //history.replace('/events')
+      history.replace('/events')
   }
 
   const sleep = (milliseconds: number) => {
@@ -144,12 +140,6 @@ const AddEvent: React.FC = () => {
               <IonPopover trigger='date' size='auto'>
                   <IonDatetime presentation='date' locale="en-EN" onIonChange={e => setDate(formatDate(e.detail.value!))}/>
               </IonPopover>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-          <IonCol>
-              <IonLabel class='profileLabel'>Website</IonLabel>
-              <IonInput value={website} placeholder="Enter website" onIonChange={e => setWebsite(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
           <IonRow> 

@@ -40,6 +40,7 @@ const EditProfile: React.FC = () => {
         (result) => {
           setItems(result);
           console.log(result);
+          setValues();
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -50,6 +51,18 @@ const EditProfile: React.FC = () => {
         }
       )
   }, [])
+
+  async function setValues() {
+    await sleep(2000)
+    setFullName(items?.fullName);
+    setDate(items?.date);
+    setEmail(items?.email);
+    setGender(items?.gender);
+    setCountry(items?.country);
+    setLanguage(items?.language);
+    setDescription(items?.description);
+    console.log(items?.fullName);
+  }
 
   async function submitChanges() {
       setBusy(true)
@@ -88,6 +101,7 @@ const EditProfile: React.FC = () => {
           console.log(error);
         }
       )
+      await sleep(2000)
       setBusy(false)
       history.replace('/profile')
   }
@@ -185,48 +199,42 @@ const EditProfile: React.FC = () => {
           <IonRow>
             <IonCol size='8'>
               <IonLabel class='profileLabel'>Full name</IonLabel>
-              <p>Joan Salord Ribó</p>
-              <IonInput value={fullName} placeholder="Enter Input" onIonChange={e => setFullName(e.detail.value!)}></IonInput>
+              
+              <IonInput value={fullName} placeholder={items?.fullName} onIonChange={e => setFullName(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Birth date</IonLabel>
-              <p>21/08/2000</p>
-              <IonInput value={date} id="date" placeholder='date'/>
+              <IonInput value={date} id="date" placeholder={items?.date}/>
               <IonPopover trigger='date' size='auto'>
-                  <IonDatetime presentation='date' locale="en-EN" onIonChange={e => setDate(formatDate(e.detail.value!))}/>
+                  <IonDatetime value={date} presentation='date' locale="en-EN" onIonChange={e => setDate(formatDate(e.detail.value!))}/>
               </IonPopover>
             </IonCol>
           </IonRow>
           <IonRow>
           <IonCol>
               <IonLabel class='profileLabel'>Email</IonLabel>
-              <p>a21joasalrib@inspedralbes.cat</p>
-              <IonInput value={email} placeholder="Enter Input" onIonChange={e => setEmail(e.detail.value!)}></IonInput>
+              <IonInput value={email} placeholder={items?.email} onIonChange={e => setEmail(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
           <IonRow> 
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Sex</IonLabel>
-              <p>Please</p>
-              <IonInput value={gender} placeholder="Enter Input" onIonChange={e => setGender(e.detail.value!)}></IonInput>
+              <IonInput value={gender} placeholder={items?.gender} onIonChange={e => setGender(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Country</IonLabel>
-              <p>Spain</p>
-              <IonInput value={country} placeholder="Enter Input" onIonChange={e => setCountry(e.detail.value!)}></IonInput>
+              <IonInput value={country} placeholder={items?.country} onIonChange={e => setCountry(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Language</IonLabel>
-              <p>Spanish</p>
-              <IonInput value={language} placeholder="Enter Input" onIonChange={e => setLanguage(e.detail.value!)}></IonInput>
+              <IonInput value={language} placeholder={items?.country} onIonChange={e => setLanguage(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
               <IonLabel class='profileLabel'>Description</IonLabel>
               <IonTextarea >
-                <p className='descriptionText'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie sem nec nibh congue gravida. Curabitur quis tincidunt lacus. Proin convallis at dolor non malesuada. Maecenas bibendum nulla sit amet diam sagittis sollicitudin. Integer pulvinar lobortis neque, ut venenatis risus tempus id. Aliquam tristique commodo rutrum. Vestibulum volutpat vehicula arcu, vel gravida sapien sodales eget. Aenean ac cursus purus. Ut vitae quam eu mi iaculis bibendum eu ac arcu.</p>
-                <IonInput value={description} placeholder="Enter Input" onIonChange={e => setDescription(e.detail.value!)}></IonInput>
+                <IonInput value={description} placeholder={items?.description} onIonChange={e => setDescription(e.detail.value!)}></IonInput>
               </IonTextarea>
             </IonCol>
           </IonRow>

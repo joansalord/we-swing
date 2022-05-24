@@ -99,7 +99,6 @@ const Events: React.FC = () => {
                 <h3>Country: {item.country}</h3>
                 <h3>Town: {item.town}</h3>
                 <IonNote>Date: {item.date}</IonNote>
-                <p>Website: {item.website}</p>
                 <p>Styles: {item.styles}</p>
                 <p>Description: {item.description}</p>
               </IonLabel>

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { loginUser } from "../firebaseConfig";
 import { setUserState } from "../redux/actions";
+import './Login.css';
 
 const Login: React.FC = () => {
 
@@ -41,12 +42,17 @@ const Login: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         {busy && <IonLoading message="Plese wait.." duration={0} isOpen={busy} animated={true}/>}
-        <IonContent fullscreen>
-          <IonInput placeholder="Username" onIonChange={(e : any) => setUsername(e.target.value)}/>
-          <IonInput placeholder="Password" type="password" onIonChange={(e : any) => setPassword(e.target.value)}/>
-          <IonButton onClick={login}>Login</IonButton>
-          <p>New here? <Link to="/register">Register</Link></p>
-        </IonContent>
+        
+          <IonContent fullscreen>
+            <div className="mainDiv">
+              <IonInput placeholder="Username" onIonChange={(e : any) => setUsername(e.target.value)}/>
+              <IonInput placeholder="Password" type="password" onIonChange={(e : any) => setPassword(e.target.value)}/>
+              <br />
+              <IonButton onClick={login}>Login</IonButton>
+              <p>New here? <Link to="/register">Register</Link></p>
+            </div>
+          </IonContent>
+        
       </IonPage>
     );
 };

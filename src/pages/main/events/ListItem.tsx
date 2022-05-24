@@ -159,12 +159,6 @@ const ListItem: React.FC<ListItemPageProps> = ({match}) => {
               </IonCol>
             </IonRow>
             <IonRow>
-              <IonCol>
-                <IonLabel class='profileLabel'>Website</IonLabel>
-                <p>{item.website}</p>
-              </IonCol>
-            </IonRow>
-            <IonRow>
               <IonCol size='6'>
                 <IonLabel class='profileLabel'>Country</IonLabel>
                 <p>{item.country}</p>
