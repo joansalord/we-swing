@@ -135,7 +135,7 @@ const Register: React.FC = () => {
           <IonRow>
             <IonCol size='8'>
               <IonLabel class='profileLabel'>Full name</IonLabel>
-              <IonInput value={fullName} placeholder="Enter Input" onIonChange={e => setFullName(e.detail.value!)}></IonInput>
+              <IonInput value={fullName} placeholder="Enter full name" onIonChange={e => setFullName(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Birth date</IonLabel>
@@ -148,21 +148,21 @@ const Register: React.FC = () => {
           <IonRow>
             <IonCol>
               <IonLabel class='profileLabel'>Email</IonLabel>
-              <IonInput value={email} placeholder="Enter Input" onIonChange={e => setEmail(e.detail.value!)}></IonInput>
+              <IonInput value={email} placeholder="Enter email" onIonChange={e => setEmail(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
           <IonRow> 
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Gender</IonLabel>
-              <IonInput value={gender} placeholder="Enter Input" onIonChange={e => setGender(e.detail.value!)}></IonInput>
+              <IonInput value={gender} placeholder="Enter gender" onIonChange={e => setGender(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Country</IonLabel>
-              <IonInput value={country} placeholder="Enter Input" onIonChange={e => setCountry(e.detail.value!)}></IonInput>
+              <IonInput value={country} placeholder="Enter country" onIonChange={e => setCountry(e.detail.value!)}></IonInput>
             </IonCol>
             <IonCol size='4'>
               <IonLabel class='profileLabel'>Language</IonLabel>
-              <IonInput value={language} placeholder="Enter Input" onIonChange={e => setLanguage(e.detail.value!)}></IonInput>
+              <IonInput value={language} placeholder="Enter language" onIonChange={e => setLanguage(e.detail.value!)}></IonInput>
             </IonCol>
           </IonRow>
         </div>
